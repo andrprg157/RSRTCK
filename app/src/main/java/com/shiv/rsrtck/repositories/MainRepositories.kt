@@ -2,6 +2,7 @@ package com.shi
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 
 import androidx.lifecycle.MutableLiveData
 import com.cheezycode.randomquote.models.QuoteList
@@ -13,7 +14,11 @@ import com.shiv.rsrtck.utils.NetworkUtils
 class MainRepositories(private val apiInterface: ApiInterface,private val context: Context)
 {
     var mutableLiveData = MutableLiveData<Response<QuoteList>>()
+    var cityList = MutableLiveData<String>()
      val quoteDatabase =QuoteDatabase.getDatabase(context) //SEND THIS FROM MAINACTIVITY
+
+    val cities : LiveData<String>
+    get() =cityList
 
 
 
@@ -64,6 +69,14 @@ class MainRepositories(private val apiInterface: ApiInterface,private val contex
 
         return mutableLiveData
 
+
+    }
+
+    fun getCityList():List<String>
+    {
+       // cityList.add("mumbai")
+      return  listOf("mumbia","delhi","bangalore","calcutta","hyderabad","ahmedabad",
+            "chennai","kolkata","surat","pune","jaipur","jucknow","kanpur","nagpur","indore","thane","bhopal")
 
     }
 }
